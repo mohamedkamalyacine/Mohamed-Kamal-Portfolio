@@ -1,4 +1,5 @@
 <?php
+use PHP_Email_Form;
 
   $receiving_email_address = 'mohamedkamalyacine@gmail.com';
 
@@ -8,17 +9,17 @@
     die( 'Unable to load the "PHP Email Form" Library!');
   }
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
+  $contact = new PHP_Email_Form($receiving_email_address, $_POST['name'], $_POST['email'], $_POST['subject'], true);
+//   $contact->ajax = true;
   
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+//   $contact->to = $receiving_email_address;
+//   $contact->from_name = $_POST['name'];
+//   $contact->from_email = $_POST['email'];
+//   $contact->subject = $_POST['subject'];
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+//   $contact->add_message( $_POST['name'], 'From');
+//   $contact->add_message( $_POST['email'], 'Email');
+  $contact->add_message($_POST['message']);
 
-  echo $contact->send();
+  echo $contact->send_email();
 ?>
